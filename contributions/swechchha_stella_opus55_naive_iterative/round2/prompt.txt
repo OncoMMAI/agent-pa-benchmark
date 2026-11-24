@@ -1,0 +1,90 @@
+You are a bioinformatics researcher tasked with building a comprehensive human protein phosphorylation atlas from available databases.
+
+Your goal: Curate ALL known human kinase-substrate-phosphosite relationships by systematically querying the databases available to you.
+
+For each relationship, you must capture:
+  - Kinase gene symbol (the enzyme)
+  - Substrate gene symbol (the target protein)
+  - Phosphorylation site (e.g., Y15, S10, T161)
+  - Heptameric peptide sequence around the site (if available)
+  - Substrate UniProt accession (if available)
+  - Which database(s) support this relationship
+
+Requirements:
+  1. Be EXHAUSTIVE — the atlas should contain every kinase-substrate-site triplet present in the databases. Missing entries is worse than having extra entries.
+  2. Cross-reference across databases — if the same relationship appears in multiple databases, record all supporting sources.
+  3. Do NOT fabricate data. Only include relationships returned by the tools.
+
+Start by discovering what databases are available, then develop and execute a systematic curation strategy.
+
+When you are finished, call the "submit_atlas" tool with your complete results.
+
+You are on Round 2 of an iterative curation process. Below is feedback from your previous round(s). Use it to improve.
+
+=== PERFORMANCE FEEDBACK FROM ROUND 1 ===
+
+Your atlas from Round 1 was scored against a curated gold standard.
+Here are your results:
+
+TRIPLET-LEVEL METRICS:
+- Entries submitted: 39015
+- True Positives (correct): 13967
+- False Positives (not in gold): 25019
+- False Negatives (missed): 1668
+- Precision: 0.3583
+- Recall: 0.8933
+- F1: 0.5115
+
+KINASE DISCOVERY:
+- Kinases found: 388
+- Kinases missed: 45
+- Discovery rate: 89.6%
+
+COLUMN-LEVEL ACCURACY (for matched entries):
+- Phospho-site accuracy: 100.0%
+- Peptide exact accuracy: 0.0%
+- Peptide close accuracy (case-insensitive): 0.0%
+- UniProt accuracy: 94.5%
+
+DATABASE USAGE:
+- Databases accessed: KEA, MIMP, PhosphoNetworks, PhosphoSite, PhosphoSite_MIMP, PhosphoSite_ProtMapper, ProtMapper, phosphoELM, phosphoELM_MIMP, BEL-Large-Corpus_ProtMapper, HPRD, HPRD_MIMP, RLIMS-P_ProtMapper, SIGNOR, SIGNOR_ProtMapper, dbPTM, Li2012, NCI-PID_ProtMapper, REACH_ProtMapper, Sparser_ProtMapper, Reactome_ProtMapper
+- Multi-DB coverage: 68.7%
+
+TOP 10 MISSED KINASES (by # of gold entries):
+  - ADRBK1
+  - BAZ1B
+  - BCAT2
+  - BCR/ABL
+  - CAD
+  - CSF1R
+  - DCAF1
+  - DDR1
+  - DYRK4
+  - ENPP3
+
+AREAS FOR IMPROVEMENT:
+- Your recall is 89.3%. You missed 1668 entries. Try querying additional databases beyond KEA, MIMP, PhosphoNetworks, PhosphoSite, PhosphoSite_MIMP, PhosphoSite_ProtMapper, ProtMapper, phosphoELM, phosphoELM_MIMP, BEL-Large-Corpus_ProtMapper, HPRD, HPRD_MIMP, RLIMS-P_ProtMapper, SIGNOR, SIGNOR_ProtMapper, dbPTM, Li2012, NCI-PID_ProtMapper, REACH_ProtMapper, Sparser_ProtMapper, Reactome_ProtMapper.
+- Peptide accuracy is 0.0%. Ensure you retrieve the SITE_+/-7_AA field from each database.
+- You missed 45 kinases. Some may be in databases you didn't query, or listed under alternative gene symbols.
+
+=== END FEEDBACK ===
+
+Based on this feedback, please try again. Your goal is to IMPROVE your recall
+(find more of the 1668 entries you missed) while maintaining accuracy.
+Focus especially on:
+1. The missed kinases listed above
+2. Databases you did not query in Round 1
+3. Any systematic gaps in your coverage
+
+
+=== HARNESS NOTE (STELLA adapter; identical across conditions) ===
+Your output is scored automatically. Besides your usual tools you have these harness tools:
+  bench_web_fetch(url) -> dict        fetch a URL (text, truncated to 15,000 chars; gzip decompressed)
+  fetch_and_parse_db(url, source_name) -> dict   download a dataset and auto-parse it into the atlas
+  ingest_entries_file(path, source_name) -> dict   add entries from a JSON/CSV/TSV file you or dev_agent wrote
+  submit_atlas(additional_entries, strategy_summary) -> dict   submit the final atlas (call once, at the end)
+Only entries that reach the harness (fetch_and_parse_db, ingest_entries_file, or
+submit_atlas(additional_entries=<python list>)) are scored. The atlas is too large to paste
+into a message: build it in Python or in a file and hand it over with these tools.
+If the task mentions tools you do not have, use the tools you do have.
+After submit_atlas returns status "accepted", finish with final_answer(<short strategy summary>).

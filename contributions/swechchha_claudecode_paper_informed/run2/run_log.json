@@ -1,0 +1,19 @@
+{
+  "agent": "Claude Code (claude-opus-5-5), interactive session",
+  "condition": "paper_informed",
+  "run": 2,
+  "date": "2026-11-17",
+  "databases_attempted": {
+    "PhosphoSitePlus": "Direct https://phosphosite.org/downloads/Kinase_Substrate_Dataset.gz still returns HTML login page; PSP kinase-substrate records obtained via OmniPath enz_sub (https://omnipathdb.org/enzsub, license=academic), keeping only rows whose sources include PhosphoSite or PhosphoSite_*",
+    "SIGNOR": "OK - https://signor.uniroma2.it/getData.php?organism=9606",
+    "UniProt": "OK - rest.uniprot.org search, reviewed human entries with phospho MOD_RES (8,075 entries) + 393 extra sequences for PSP substrates",
+    "HGNC": "OK - hgnc_complete_set.txt for symbol normalization"
+  },
+  "atlas_stats": {"entries": 22328, "kinases": 509, "substrates": 3272, "with_peptide": 20322},
+  "excluded": "family/complex kinase names (PKA, CK2, AMPK, ERK1/2, ...), ambiguous 'X or Y' kinases, SIGNOR rows without a site, PSP sites whose residue does not match the current canonical sequence are kept but without peptide",
+  "token_usage": {
+    "total_input_tokens": null, "total_output_tokens": null, "total_tokens": null,
+    "estimated_cost_usd": null, "api_calls": null,
+    "note": "Interactive Claude Code subscription session; fill in from /cost."
+  }
+}

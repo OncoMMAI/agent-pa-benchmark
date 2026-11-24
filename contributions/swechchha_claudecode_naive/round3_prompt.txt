@@ -1,0 +1,92 @@
+You are a bioinformatics researcher tasked with building a comprehensive human protein phosphorylation atlas from available databases.
+
+Your goal: Curate ALL known human kinase-substrate-phosphosite relationships by systematically querying the databases available to you.
+
+For each relationship, you must capture:
+  - Kinase gene symbol (the enzyme)
+  - Substrate gene symbol (the target protein)
+  - Phosphorylation site (e.g., Y15, S10, T161)
+  - Heptameric peptide sequence around the site (if available)
+  - Substrate UniProt accession (if available)
+  - Which database(s) support this relationship
+
+Requirements:
+  1. Be EXHAUSTIVE — the atlas should contain every kinase-substrate-site triplet present in the databases. Missing entries is worse than having extra entries.
+  2. Cross-reference across databases — if the same relationship appears in multiple databases, record all supporting sources.
+  3. Do NOT fabricate data. Only include relationships returned by the tools.
+
+Start by discovering what databases are available, then develop and execute a systematic curation strategy.
+
+When you are finished, call the "submit_atlas" tool with your complete results.
+
+You are on Round 3 of an iterative curation process.
+Below is feedback from your previous round(s). Use it to improve.
+
+=== PERFORMANCE FEEDBACK FROM ROUND 1 ===
+
+Your atlas from Round 1 was scored against a curated gold standard:
+
+TRIPLET-LEVEL:  13967 correct, 25019 extra, 1668 missed
+  Precision: 0.3583  |  Recall: 0.8933  |  F1: 0.5115
+
+KINASE DISCOVERY: 388 found, 45 missed (89.6%)
+
+TOP MISSED KINASES (by gold entry count):
+  - ADRBK1
+  - BAZ1B
+  - BCAT2
+  - BCR/ABL
+  - CAD
+  - CSF1R
+  - DCAF1
+  - DDR1
+  - DYRK4
+  - ENPP3
+  - EPHA3
+  - EPHA4
+  - EPHA5
+  - EPHA6
+  - EPHA7
+
+AREAS FOR IMPROVEMENT:
+- Recall is 89.3%. 1668 entries missed. Try additional databases or query strategies.
+- 45 kinases missed. Check alternative gene symbols.
+
+=== END FEEDBACK (Round 1) ===
+
+
+
+=== PERFORMANCE FEEDBACK FROM ROUND 2 ===
+
+Your atlas from Round 2 was scored against a curated gold standard:
+
+TRIPLET-LEVEL:  8128 correct, 5523 extra, 7507 missed
+  Precision: 0.5954  |  Recall: 0.5199  |  F1: 0.5551
+
+KINASE DISCOVERY: 386 found, 47 missed (89.1%)
+
+TOP MISSED KINASES (by gold entry count):
+  - ACVRL1
+  - ADRBK1
+  - BAZ1B
+  - BCAT2
+  - BCR/ABL
+  - BMP2K
+  - CDC42BPB
+  - CDK15
+  - CDK18
+  - CDKL2
+  - CERT1
+  - DCAF1
+  - ENPP3
+  - EPHA1
+  - EPHA6
+
+AREAS FOR IMPROVEMENT:
+- Recall is 52.0%. 7507 entries missed. Try additional databases or query strategies.
+- Only 13.2% entries cross-referenced. Query PSP, SIGNOR, and UniProt for broader coverage.
+- 47 kinases missed. Check alternative gene symbols.
+
+=== END FEEDBACK (Round 2) ===
+
+Focus on finding the entries you missed while maintaining accuracy.

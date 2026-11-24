@@ -1,0 +1,33 @@
+{
+ "total_triplets": 13918,
+ "by_source": {
+  "SIGNOR": 9310,
+  "SIGNOR;UniProt": 1834,
+  "UniProt": 2774
+ },
+ "kinase_entity_types": {
+  "protein": 8165,
+  "resolved": 2870,
+  "autophosphorylation": 631,
+  "alias": 194,
+  "proteinfamily": 589,
+  "complex": 536,
+  "unresolved_family_or_name": 913,
+  "fusion protein": 19,
+  "phenotype": 1
+ },
+ "unique_kinases": 545,
+ "unique_substrates": 2824,
+ "with_peptide": 13912,
+ "with_uniprot": 13780,
+ "parse_stats": {
+  "uniprot_attributed_features": 3880,
+  "uniprot_unresolved_family_or_name": 913,
+  "uniprot_autophosphorylation": 631,
+  "uniprot_resolved": 2870,
+  "uniprot_alias": 194,
+  "signor_phospho_rows": 14517,
+  "signor_triplets_in": 12345,
+  "signor_no_site": 2175
+ }
+}

@@ -1,0 +1,53 @@
+{
+  "harness_adaptations": [
+    "pipeline_guided.txt references DatabaseTools tool names unavailable in this harness"
+  ],
+  "atlas_entries": 34164,
+  "kinases": 690,
+  "substrates": 3643,
+  "unique_substrate_sites": 15627,
+  "unique_heptamers": 13389,
+  "entries_with_hps": 30741,
+  "hps_from_uniprot": 30702,
+  "hps_from_signor": 39,
+  "entries_2plus_dbs": 14618,
+  "entries_per_db": {
+    "PhosphoSitePlus": 18666,
+    "KEA": 10986,
+    "SIGNOR": 10795,
+    "HPRD": 9681,
+    "Phospho.ELM": 9186,
+    "PhosphoNetworks": 4205,
+    "NCI-PID": 1671,
+    "dbPTM": 1271,
+    "Reactome": 989,
+    "Li2012": 322
+  },
+  "raw_records_extracted": 40978,
+  "flagged_records": 8894,
+  "flag_reasons": {
+    "only prediction/text-mining support": 5870,
+    "no site": 1380,
+    "non-protein entity (proteinfamily->protein)": 727,
+    "non-protein entity (complex->protein)": 532,
+    "non-protein entity (protein->proteinfamily)": 183,
+    "non-protein entity (protein->complex)": 85,
+    "non-protein entity (proteinfamily->proteinfamily)": 35,
+    "non-protein entity (complex->proteinfamily)": 21,
+    "non-protein entity (fusion protein->protein)": 21,
+    "non-protein entity (proteinfamily->complex)": 15,
+    "non-protein entity (complex->complex)": 14,
+    "non-protein entity (protein->fusion protein)": 8,
+    "non-protein entity (protein->smallmolecule)": 1,
+    "non-protein entity (fusion protein->complex)": 1,
+    "gene symbol not HGNC-mappable (kinase": 1
+  },
+  "symbol_mapping": {
+    "kinase_map_uniprot": 40765,
+    "substrate_map_uniprot": 40975,
+    "substrate_map_symbol": 1,
+    "substrate_map_alias": 1,
+    "kinase_map_symbol": 212
+  },
+  "nonstandard_symbols_in_atlas": []
+}

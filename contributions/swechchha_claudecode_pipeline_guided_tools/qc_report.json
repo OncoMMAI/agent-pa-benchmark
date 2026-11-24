@@ -1,0 +1,81 @@
+{
+  "data_provenance": {
+    "PhosphoSitePlus": "OmniPath enz_sub records with PhosphoSite* source tokens (PSP bulk download not authorized for our account); peptides from UniProt canonical sequence",
+    "SIGNOR": "Exploration/raw_data/signor/human.tsv (getHumanData), mechanism == phosphorylation, protein->protein",
+    "UniProt": "Exploration/raw_data/uniprot/mod.tsv, '; by <kinase>' phospho MOD_RES, non-experimental ECO excluded"
+  },
+  "db_stats": {
+    "psp": {
+      "db": "psp",
+      "total_entries": 18677,
+      "unique_kinases": 441,
+      "unique_substrates": 2882
+    },
+    "signor": {
+      "db": "signor",
+      "total_entries": 10844,
+      "unique_kinases": 440,
+      "unique_substrates": 2307
+    },
+    "uniprot": {
+      "db": "uniprot",
+      "total_entries": 3825,
+      "unique_kinases": 290,
+      "unique_substrates": 1261
+    }
+  },
+  "atlas_entries": 23125,
+  "kinases": 514,
+  "substrates": 3332,
+  "unique_substrate_sites": 12722,
+  "unique_peptides": 11519,
+  "entries_with_peptide": 21149,
+  "entries_with_uniprot": 23125,
+  "entries_2plus_dbs": 7877,
+  "entries_3_dbs": 1385,
+  "entries_per_db": {
+    "PhosphoSitePlus": 18663,
+    "SIGNOR": 9838,
+    "UniProt": 3886
+  },
+  "peptide_source": {
+    "PhosphoSitePlus": 16648,
+    "SIGNOR": 2947,
+    "uniprot_acc_from_hgnc": 2588,
+    "derived_from_uniprot_sequence": 1554
+  },
+  "peptide_conflicts_across_dbs": 7,
+  "raw_records": 32340,
+  "validated_records": 32239,
+  "flagged_records": 101,
+  "flag_reasons": {
+    "invalid/missing phospho-site": 5,
+    "kinase symbol not HGNC-mappable": 96
+  },
+  "unmappable_listed_names": 19,
+  "harmonization_methods": {
+    "kinase:approved": 30800,
+    "substrate:approved": 32276,
+    "substrate:uniprot": 39,
+    "substrate:prev_symbol": 25,
+    "kinase:prev_symbol": 28,
+    "peptide_center_mismatch_dropped": 414,
+    "kinase:slash_part": 142,
+    "kinase:benchmark_alias": 387,
+    "kinase:unmapped": 90,
+    "kinase:alias_symbol": 188,
+    "kinase:approved_case": 28,
+    "kinase:uniprot_name_map": 174,
+    "kinase:ambiguous_alias": 6,
+    "kinase:autocatalysis->substrate": 497
+  },
+  "tool_calls": {
+    "list_databases": 1,
+    "get_stats": 3,
+    "list_kinases": 13,
+    "list_substrates": 66,
+    "query_by_kinase": 3334,
+    "query_by_substrate": 8613,
+    "query_all_dbs": 721
+  }
+}

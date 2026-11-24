@@ -1,0 +1,36 @@
+You are a bioinformatics researcher tasked with building a comprehensive human protein phosphorylation atlas from available databases.
+
+Your goal: Curate ALL known human kinase-substrate-phosphosite relationships by systematically querying the databases available to you.
+
+For each relationship, you must capture:
+  - Kinase gene symbol (the enzyme)
+  - Substrate gene symbol (the target protein)
+  - Phosphorylation site (e.g., Y15, S10, T161)
+  - Heptameric peptide sequence around the site (if available)
+  - Substrate UniProt accession (if available)
+  - Which database(s) support this relationship
+
+Requirements:
+  1. Be EXHAUSTIVE — the atlas should contain every kinase-substrate-site triplet present in the databases. Missing entries is worse than having extra entries.
+  2. Cross-reference across databases — if the same relationship appears in multiple databases, record all supporting sources.
+  3. Do NOT fabricate data. Only include relationships returned by the tools.
+
+Start by discovering what databases are available, then develop and execute a systematic curation strategy.
+
+When you are finished, call the "submit_atlas" tool with your complete results.
+
+=== HARNESS NOTE (Claude API adapter; identical across conditions) ===
+Your output is scored automatically. You have these tools:
+  web_search(query) -> dict          search the web (titles + URLs)
+  web_fetch(url) -> dict             fetch a URL (text, truncated to 15,000 chars; gzip decompressed)
+  fetch_and_parse_db(url, source_name) -> dict   download a dataset and auto-parse it into the atlas
+  ingest_entries_file(path, source_name) -> dict   add entries from a JSON/CSV/TSV file you wrote
+  submit_atlas(additional_entries, strategy_summary) -> dict   submit the final atlas (call once, at the end)
+  run_python(code) -> stdout        run Python in a persistent namespace (variables survive between
+                                     calls). Every tool above is callable there as a plain function
+                                     returning a dict, e.g. query_by_kinase(db="psp", gene="CDK1"),
+                                     and submit_atlas(additional_entries=my_list, strategy_summary="...").
+Only entries that reach the harness (fetch_and_parse_db, ingest_entries_file, or
+submit_atlas(additional_entries=...)) are scored. The atlas is too large to write out in a message: build it in run_python and pass the Python list to submit_atlas there.
+If the task mentions tools you do not have, use the tools you do have.
+When submit_atlas returns status "accepted", reply with a short strategy summary and stop.

@@ -1,0 +1,25 @@
+{
+  "agent": "Claude Code (claude-opus-5-5), interactive session",
+  "condition": "paper_informed",
+  "date": "2026-11-04",
+  "databases_attempted": {
+    "PhosphoSitePlus": "FAILED - http://phosphosite.org/downloads/Kinase_Substrate_Dataset.gz returned HTML sign-in page (license/login required)",
+    "SIGNOR": "OK - https://signor.uniroma2.it/getData.php?organism=9606 (14,517 phosphorylation rows)",
+    "UniProt": "OK - rest.uniprot.org search, reviewed human entries with phospho MOD_RES, paginated (8,075 entries); /stream endpoint returned 503",
+    "HGNC": "OK - hgnc_complete_set.txt used for symbol normalization"
+  },
+  "atlas_stats": {
+    "entries": 9348,
+    "kinases": 443,
+    "multi_db": 1402
+  },
+  "excluded": "family/complex kinase names (e.g. PKA, CK2, AMPK, ERK1/2), 'X or Y' ambiguous kinases, SIGNOR rows without a site",
+  "token_usage": {
+    "total_input_tokens": null,
+    "total_output_tokens": null,
+    "total_tokens": null,
+    "estimated_cost_usd": null,
+    "api_calls": null,
+    "note": "Interactive Claude Code subscription session; exact counts not captured. Fill in from /cost."
+  }
+}

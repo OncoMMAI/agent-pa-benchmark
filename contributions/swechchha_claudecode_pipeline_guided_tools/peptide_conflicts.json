@@ -1,0 +1,51 @@
+[
+ {
+  "triplet": "CDK1|IREB2|S157",
+  "peptides": {
+   "PhosphoSitePlus": "LQKAGKLsPLKVQPK",
+   "SIGNOR": "LQKAGKLsPVKVQPK"
+  }
+ },
+ {
+  "triplet": "CDK1|NINL|S185",
+  "peptides": {
+   "PhosphoSitePlus": "WDSEDFGsPQKSCSP",
+   "SIGNOR": "NRHSPSWsPDGRRRQ"
+  }
+ },
+ {
+  "triplet": "CDK9|NCOA2|S493",
+  "peptides": {
+   "PhosphoSitePlus": "LSPRHRMsPGVAGSP",
+   "SIGNOR": "LSPRHRMsSPGVAGS"
+  }
+ },
+ {
+  "triplet": "GSK3B|CREB1|S129",
+  "peptides": {
+   "PhosphoSitePlus": "KILNDLSsDAPGVPR",
+   "SIGNOR": "QKRREILsRRPSYRK"
+  }
+ },
+ {
+  "triplet": "PRKACA|CFTR|S768",
+  "peptides": {
+   "PhosphoSitePlus": "LQARRRQsVLNLMTH",
+   "SIGNOR": "EPLERRLsLVPDSEQ"
+  }
+ },
+ {
+  "triplet": "PRKCD|CXCR4|S325",
+  "peptides": {
+   "PhosphoSitePlus": "TSVSRGSsLKILSKG",
+   "SIGNOR": "LTSVSRGsSLKILSK"
+  }
+ },
+ {
+  "triplet": "SRC|GSN|Y465",
+  "peptides": {
+   "PhosphoSitePlus": "VPVDPATyGQFYGGD",
+   "SIGNOR": "VPVPTNLyGDFFTGD"
+  }
+ }
+]

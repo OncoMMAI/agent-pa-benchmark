@@ -1,0 +1,25 @@
+{
+  "inputs": {
+    "uniprot_sequences": 20429
+  },
+  "psp": {
+    "omnipath_rows": 39037,
+    "phosphosite_rows": 18677,
+    "with_peptide": 16661,
+    "no_peptide": 2016,
+    "written": 18677
+  },
+  "signor": {
+    "phosphorylation_rows": 14517,
+    "experimental_taxid_non9606": 3685,
+    "non_protein_entity": 1496,
+    "no_residue": 2174,
+    "written": 10847
+  },
+  "uniprot": {
+    "kinase_attributed_sites": 3878,
+    "excluded_non_experimental": 703,
+    "written": 3825
+  },
+  "flagged_total": 4373
+}

@@ -1,0 +1,192 @@
+{
+  "agent": "STELLA (manager_agent=anthropic/claude-opus-5.5, dev_agent=anthropic/claude-opus-5.5, critic_agent=anthropic/claude-opus-5.5, tool_creation_agent=anthropic/claude-opus-5.5)",
+  "framework": "STELLA (smolagents: manager CodeAgent + dev/critic/tool_creation agents)",
+  "stella_commit": "7899a96",
+  "stella_remote": "https://github.com/asfarasimconcerned/STELLA.git",
+  "benchmark_commit": "e085554",
+  "smolagents_version": "1.26.0",
+  "python": "3.11.18",
+  "model": "anthropic/claude-opus-5.5",
+  "models": {
+    "manager_agent": "anthropic/claude-opus-5.5",
+    "dev_agent": "anthropic/claude-opus-5.5",
+    "critic_agent": "anthropic/claude-opus-5.5",
+    "tool_creation_agent": "anthropic/claude-opus-5.5"
+  },
+  "model_config": {
+    "preset": "custom",
+    "preset_label": "custom flags",
+    "preset_description": "models set with --backbone / --*-model flags",
+    "stella_original_models": {
+      "manager_agent": "x-ai/grok-4",
+      "dev_agent": "google/gemini-2.5-pro",
+      "critic_agent": "anthropic/claude-sonnet-4",
+      "tool_creation_agent": "anthropic/claude-sonnet-4"
+    },
+    "models_used": {
+      "manager_agent": "anthropic/claude-opus-5.5",
+      "dev_agent": "anthropic/claude-opus-5.5",
+      "critic_agent": "anthropic/claude-opus-5.5",
+      "tool_creation_agent": "anthropic/claude-opus-5.5"
+    },
+    "substitutions": [
+      {
+        "agent": "manager_agent",
+        "original": "x-ai/grok-4",
+        "used": "anthropic/claude-opus-5.5",
+        "reason": "deprecated on OpenRouter (HTTP 404); xAI recommends x-ai/grok-4.3"
+      },
+      {
+        "agent": "dev_agent",
+        "original": "google/gemini-2.5-pro",
+        "used": "anthropic/claude-opus-5.5",
+        "reason": "chosen by experiment design (backbone / override)"
+      },
+      {
+        "agent": "critic_agent",
+        "original": "anthropic/claude-sonnet-4",
+        "used": "anthropic/claude-opus-5.5",
+        "reason": "listed on OpenRouter but no provider endpoints"
+      },
+      {
+        "agent": "tool_creation_agent",
+        "original": "anthropic/claude-sonnet-4",
+        "used": "anthropic/claude-opus-5.5",
+        "reason": "listed on OpenRouter but no provider endpoints"
+      }
+    ],
+    "matches_published_stella": false,
+    "internal_llm_calls_note": "STELLA's tool-selection call (new_tools/llm.py) and the model inside new_tools/database_tools.py stay on google/gemini-2.5-pro in every preset; see token_usage.by_caller.stella_internal",
+    "flags": {
+      "backbone": "anthropic/claude-opus-5.5",
+      "manager_model": null,
+      "dev_model": null,
+      "critic_model": null,
+      "max_output_tokens": null
+    }
+  },
+  "condition": "naive_round3",
+  "mode": "live",
+  "round": 3,
+  "prompt_file": "agents/prompts/naive.txt",
+  "prompt_chars": 6445,
+  "harness_note": "\n=== HARNESS NOTE (STELLA adapter; identical across conditions) ===\nYour output is scored automatically. Besides your usual tools you have these harness tools:\n  bench_web_fetch(url) -> dict        fetch a URL (text, truncated to 15,000 chars; gzip decompressed)\n  fetch_and_parse_db(url, source_name) -> dict   download a dataset and auto-parse it into the atlas\n  ingest_entries_file(path, source_name) -> dict   add entries from a JSON/CSV/TSV file you or dev_agent wrote\n  submit_atlas(additional_entries, strategy_summary) -> dict   submit the final atlas (call once, at the end)\nOnly entries that reach the harness (fetch_and_parse_db, ingest_entries_file, or\nsubmit_atlas(additional_entries=<python list>)) are scored. The atlas is too large to paste\ninto a message: build it in Python or in a file and hand it over with these tools.\nIf the task mentions tools you do not have, use the tools you do have.\nAfter submit_atlas returns status \"accepted\", finish with final_answer(<short strategy summary>).",
+  "feedback_included": true,
+  "stella_config": {
+    "memory": "off",
+    "prompts": "stella",
+    "max_steps": 30,
+    "max_output_tokens": null
+  },
+  "budget": {
+    "timeout_min": 60,
+    "max_steps": 30,
+    "max_tool_calls": "off"
+  },
+  "stop_reason": "error: AgentGenerationError: Error in generating model output:\nError code: 402 - This request would exceed your available credits given your current in-flight requests. Retry after in-flight requests settle, or add credits.",
+  "strategy": "",
+  "final_answer": null,
+  "atlas_source": "recovered_from_namespace:atlas",
+  "submissions": [],
+  "databases_accessed": [
+    "BEL-Large-Corpus_ProtMapper",
+    "HPRD",
+    "HPRD_MIMP",
+    "KEA",
+    "Li2012",
+    "MIMP",
+    "NCI-PID_ProtMapper",
+    "PhosphoNetworks",
+    "PhosphoSite",
+    "PhosphoSite_MIMP",
+    "PhosphoSite_ProtMapper",
+    "ProtMapper",
+    "REACH_ProtMapper",
+    "RLIMS-P_ProtMapper",
+    "Reactome_ProtMapper",
+    "SIGNOR",
+    "SIGNOR_ProtMapper",
+    "Sparser_ProtMapper",
+    "dbPTM",
+    "phosphoELM",
+    "phosphoELM_MIMP"
+  ],
+  "raw_counts": {
+    "phosphoELM": 1788,
+    "MIMP": 12528,
+    "PhosphoSite": 12889,
+    "KEA": 10986,
+    "PhosphoSite_ProtMapper": 9206,
+    "phosphoELM_MIMP": 8911,
+    "PhosphoNetworks": 4205,
+    "ProtMapper": 20863,
+    "PhosphoSite_MIMP": 11775,
+    "SIGNOR_ProtMapper": 7280,
+    "dbPTM": 1271,
+    "RLIMS-P_ProtMapper": 2145,
+    "HPRD": 2679,
+    "BEL-Large-Corpus_ProtMapper": 905,
+    "HPRD_MIMP": 9012,
+    "SIGNOR": 7607,
+    "Li2012": 322,
+    "NCI-PID_ProtMapper": 1671,
+    "REACH_ProtMapper": 5099,
+    "Sparser_ProtMapper": 5427,
+    "Reactome_ProtMapper": 989
+  },
+  "merged_atlas": 39015,
+  "unique_kinases": 1648,
+  "unique_substrates": 3815,
+  "multi_db_entries": 26789,
+  "tool_calls": 0,
+  "agent_turns": 0,
+  "manager_steps": 2,
+  "function_calls": {},
+  "failures": [],
+  "http_hosts": {},
+  "http_failures": [],
+  "http_requests": [],
+  "self_evolved_tools": [],
+  "agent_output_files": [],
+  "elapsed_seconds": 0.1,
+  "token_usage": {
+    "total_input_tokens": 0,
+    "total_output_tokens": 0,
+    "total_tokens": 0,
+    "cache_read_input_tokens": 0,
+    "api_calls": 0,
+    "estimated_cost_usd": 0.0,
+    "cost_source": "none",
+    "calls_with_reported_cost": 0,
+    "calls_priced_from_table": 0,
+    "calls_unpriced": 0,
+    "calls_missing_usage": 0,
+    "by_caller": {},
+    "by_model": {},
+    "per_call": [],
+    "note": "Exact counts from every OpenAI-compatible chat.completions call (all STELLA agents + STELLA-internal LLM calls, e.g. tool selection and database_tools)."
+  },
+  "leakage_audit": {
+    "patterns_checked": [
+      "phosphoatlas_gold",
+      "gold_standard",
+      "contributions/",
+      "agent-pa-benchmark",
+      "/Users/swechchhaparajuli/MSDSAI/Practicum/Exploration/agent-pa-benchmark"
+    ],
+    "hits": [],
+    "local_db_access_in_live_mode": false,
+    "clean": true
+  },
+  "tool_events": [],
+  "trace": [
+    {
+      "type": "TaskStep"
+    },
+    {
+      "type": "ActionStep",
+      "step_number": "1",
+      "duration_s": 0.12
+    }
+  ]
+}

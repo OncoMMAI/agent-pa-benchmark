@@ -1,0 +1,96 @@
+source	name	count
+UniProt	PKA	243
+SIGNOR-non-protein-kinase:proteinfamily	ERK1/2	213
+SIGNOR-non-protein-kinase:proteinfamily	AKT	205
+UniProt	CK2	184
+UniProt	PKC	150
+SIGNOR-non-protein-kinase:complex	AMPK	112
+SIGNOR-non-protein-kinase:proteinfamily	Gbeta	107
+SIGNOR-non-protein-kinase:complex	CyclinB/CDK1	89
+UniProt	AMPK	79
+SIGNOR-non-protein-kinase:proteinfamily	PKA	70
+SIGNOR-non-protein-kinase:proteinfamily	RPS6K	54
+SIGNOR-non-protein-kinase:complex	TFIIH	52
+UniProt	CK1	45
+SIGNOR-non-protein-kinase:complex	CyclinA2/CDK2	45
+SIGNOR-non-protein-kinase:proteinfamily	JNK	42
+UniProt	MAPK	39
+SIGNOR-non-protein-kinase:complex	mTORC1	38
+SIGNOR-non-protein-kinase:complex	CyclinK/CDK13	27
+SIGNOR-non-protein-kinase:complex	CyclinK/CDK12	27
+SIGNOR-non-protein-kinase:complex	CyclinE/CDK2	26
+SIGNOR-non-protein-kinase:complex	CDK5/CDK5R1	24
+UniProt	GSK3	22
+SIGNOR-non-protein-kinase:fusion protein	BCR-ABL	22
+UniProt	CaMK2	21
+SIGNOR-non-protein-kinase:proteinfamily	PIM	20
+SIGNOR-non-protein-kinase:complex	IKK-complex	18
+SIGNOR-non-protein-kinase:proteinfamily	p38	17
+SIGNOR-non-protein-kinase:complex	CKM complex	16
+SIGNOR-non-protein-kinase:complex	mTORC2	16
+SIGNOR-non-protein-kinase:complex	GSK3B/Axin/APC	15
+SIGNOR-non-protein-kinase:complex	CyclinD/CDK4	14
+UniProt	SRC-type Tyr-kinases	13
+UniProt	ABL	12
+UniProt	PKG	12
+UniProt	PKB	12
+SIGNOR-non-protein-kinase:proteinfamily	MEK1/2	12
+UniProt	Tyr-kinases	11
+UniProt	PHK	10
+SIGNOR-non-protein-kinase:complex	CyclinD3/CDK6	9
+SIGNOR-non-protein-kinase:proteinfamily	PKC	9
+UniProt	PDGFR	7
+SIGNOR-non-protein-kinase:proteinfamily	ROBO	7
+SIGNOR-non-protein-kinase:proteinfamily	STK3/4	7
+UniProt	MLCK	6
+UniProt	MAP3K	6
+SIGNOR-non-protein-kinase:complex	CAK complex	6
+UniProt	PAK	5
+UniProt	viral VacV B1 kinase	5
+UniProt	CDK11	5
+SIGNOR-non-protein-kinase:complex	BMPR1A/1B/2	5
+UniProt	PKD	4
+UniProt	CDC42BP	4
+UniProt	JAK	4
+UniProt	PKB/AKT1 or PKB/AKT2	4
+SIGNOR-non-protein-kinase:complex	P-TEFb	4
+UniProt	CDC2	3
+UniProt	CK	3
+UniProt	dsDNA kinase	3
+UniProt	CAMK2	3
+UniProt	MAPK1 or MAPK3	3
+UniProt	ILK1	3
+SIGNOR-non-protein-kinase:complex	CyclinD3/CDK11A	3
+SIGNOR-non-protein-kinase:proteinfamily	PAK	3
+SIGNOR-non-protein-kinase:proteinfamily	TAOK	3
+SIGNOR-non-protein-kinase:complex	CyclinY/CDK14	3
+SIGNOR-non-protein-kinase:complex	CyclinY/CDK16	3
+SIGNOR-non-protein-kinase:proteinfamily	RTKs	3
+SIGNOR-non-protein-kinase:proteinfamily	LATS1/2	3
+SIGNOR-non-protein-kinase:complex	CyclinD3/CDK11B	3
+SIGNOR-non-protein-kinase:complex	PI3K	3
+UniProt	BARK	2
+UniProt	CAK	2
+UniProt	RAF	2
+UniProt	MAP2K	2
+SIGNOR-non-protein-kinase:complex	ULK1/Atg13/Fip200	2
+SIGNOR-non-protein-kinase:complex	CyclinD1/CDK6	2
+SIGNOR-non-protein-kinase:complex	CyclinC/CDK3	2
+UniProt	MAPK14 AND MARK3	1
+UniProt	JAK2 or TYK2	1
+UniProt	PKA or PKB/AKT1	1
+UniProt	ISPK	1
+UniProt	APP-kinase I	1
+UniProt	CAMK	1
+UniProt	MAPKAPK2 or MAPKAPK3	1
+UniProt	RPS6KA3 AND PKA	1
+UniProt	PKB/AKT1 or PKB/AKT2 or BCKDK	1
+UniProt	PI3K	1
+UniProt	TSSK1	1
+UniProt	ATM or ATR	1
+SIGNOR-non-protein-kinase:proteinfamily	SRC_kinase_family	1
+SIGNOR-non-protein-kinase:complex	CyclinA2/CDK18	1
+SIGNOR-non-protein-kinase:complex	CyclinA2/CDK1	1
+SIGNOR-non-protein-kinase:proteinfamily	PK	1
+SIGNOR-non-protein-kinase:complex	CyclinE1/CDK3	1
+SIGNOR	RET/PTC2	1

@@ -1,0 +1,802 @@
+{
+  "agent": "Biomni A1 (claude-opus-5-5)",
+  "framework": "Biomni A1",
+  "biomni_version": "0.0.8",
+  "biomni_commit": "400c1f3",
+  "benchmark_commit": "e085554",
+  "model": "claude-opus-5-5",
+  "condition": "naive",
+  "mode": "live",
+  "round": 1,
+  "prompt_file": "agents/prompts/naive.txt",
+  "prompt_chars": 1975,
+  "harness_note": "\n\n=== HARNESS NOTE (Biomni adapter; identical across conditions) ===\nYou act by writing code in <execute> blocks. The tools referred to above are\nalready defined as Python functions in your namespace:\n  web_search(query, max_results=10) -> dict   (DuckDuckGo titles + URLs)\n  You may also use Python (requests, urllib, gzip, pandas, ...) to download and parse data from URLs.\n  submit_atlas(entries, strategy_summary=\"\") -> dict\n      entries: list of dicts with at least kinase_gene, substrate_gene, phospho_site\n      (optional: heptameric_peptide, substrate_uniprot, supporting_databases).\nThe atlas is too large to paste into a message: build it in Python and call\nsubmit_atlas(...) from an <execute> block. After it returns status \"accepted\",\nreply with a short <solution> describing your strategy.",
+  "feedback_included": false,
+  "biomni_system_prompt_chars": 15751,
+  "biomni_patches": [
+    "Biomni stores <observation> results as assistant messages, so requests end on an assistant turn (= prefill), which newer Claude models reject. The runner re-sends observations as user turns and appends 'Continue.' if a request still ends on an assistant turn. Biomni source is unchanged.",
+    "Model rejects the `temperature` parameter; Biomni's default (0.7) is removed from the agent LLM and from every LLM Biomni creates internally, so the API default is used."
+  ],
+  "python_version": "3.14.6",
+  "python_executable": "/Users/swechchhaparajuli/MSDSAI/Practicum/Exploration/.venv/bin/python3",
+  "biomni_config": {
+    "use_tool_retriever": true,
+    "exec_timeout_s": 600,
+    "temperature": "omitted (API default)",
+    "data_lake": "skipped (expected_data_lake_files=[])"
+  },
+  "budget": {
+    "timeout_min": 60,
+    "max_turns": 50
+  },
+  "stop_reason": "solution",
+  "strategy": "Data lake was empty, so I downloaded public resources. (1) OmniPath enzsub (human, phosphorylation): 39,037 records aggregating PhosphoSitePlus, SIGNOR, HPRD, phospho.ELM, dbPTM, KEA, PhosphoNetworks, MIMP, ProtMapper (incl. text-mining sources REACH/Sparser/RLIMS-P), Li2012; collapsed to 39,015 kinase-substrate-site triplets with all source labels unioned. (2) SIGNOR human direct download: protein->protein phosphorylation rows with a residue; merged 9,704 matches and added 1,140 new triplets; skipped 1,513 rows lacking a parsable Ser/Thr/Tyr/His residue. Peptides are +/-3 windows from canonical UniProt sequences, kept only where the residue matched; otherwise SIGNOR's 15-mer was used. 3419 entries have no peptide because of residue/sequence mismatches; those entries are kept. Caveats: ProtMapper text-mining labels are lower-confidence; PhosphoSitePlus was only accessed through OmniPath, not directly.",
+  "atlas_source": "submit_atlas",
+  "submissions": [
+    {
+      "entries": 40152,
+      "invalid_dropped": 0,
+      "unique_triplets": 40152,
+      "t": 1795019035.54
+    }
+  ],
+  "databases_accessed": [
+    "BEL-Large-Corpus_ProtMapper",
+    "HPRD",
+    "HPRD_MIMP",
+    "KEA",
+    "Li2012",
+    "MIMP",
+    "NCI-PID_ProtMapper",
+    "PhosphoNetworks",
+    "PhosphoSite",
+    "PhosphoSite_MIMP",
+    "PhosphoSite_ProtMapper",
+    "ProtMapper",
+    "REACH_ProtMapper",
+    "RLIMS-P_ProtMapper",
+    "Reactome_ProtMapper",
+    "SIGNOR",
+    "SIGNOR_ProtMapper",
+    "Sparser_ProtMapper",
+    "dbPTM",
+    "phosphoELM",
+    "phosphoELM_MIMP"
+  ],
+  "raw_counts": {
+    "KEA": 10986,
+    "MIMP": 12528,
+    "PhosphoNetworks": 4205,
+    "PhosphoSite": 12889,
+    "PhosphoSite_MIMP": 11775,
+    "PhosphoSite_ProtMapper": 9206,
+    "ProtMapper": 20863,
+    "phosphoELM": 1788,
+    "phosphoELM_MIMP": 8911,
+    "BEL-Large-Corpus_ProtMapper": 905,
+    "HPRD": 2679,
+    "HPRD_MIMP": 9012,
+    "RLIMS-P_ProtMapper": 2145,
+    "SIGNOR": 10948,
+    "SIGNOR_ProtMapper": 7280,
+    "dbPTM": 1271,
+    "Li2012": 322,
+    "NCI-PID_ProtMapper": 1671,
+    "REACH_ProtMapper": 5099,
+    "Sparser_ProtMapper": 5427,
+    "Reactome_ProtMapper": 989
+  },
+  "merged_atlas": 40152,
+  "unique_kinases": 1667,
+  "unique_substrates": 3869,
+  "multi_db_entries": 27440,
+  "tool_calls": 10,
+  "agent_turns": 12,
+  "function_calls": {
+    "submit_atlas": 1
+  },
+  "function_errors": [],
+  "code_execution_errors": [],
+  "http_hosts": {
+    "omnipathdb.org": 1,
+    "rest.uniprot.org": 52,
+    "signor.uniroma2.it": 1
+  },
+  "http_failures": [
+    {
+      "method": "get",
+      "url": "https://rest.uniprot.org/uniprotkb/stream",
+      "status": 400,
+      "error": null,
+      "bytes": 71,
+      "t": 1795018916.62
+    },
+    {
+      "method": "get",
+      "url": "https://rest.uniprot.org/uniprotkb/stream",
+      "status": 400,
+      "error": null,
+      "bytes": 71,
+      "t": 1795018919.0
+    },
+    {
+      "method": "get",
+      "url": "https://rest.uniprot.org/uniprotkb/stream",
+      "status": 400,
+      "error": null,
+      "bytes": 71,
+      "t": 1795018919.72
+    },
+    {
+      "method": "get",
+      "url": "https://rest.uniprot.org/uniprotkb/stream",
+      "status": 400,
+      "error": null,
+      "bytes": 71,
+      "t": 1795018920.68
+    },
+    {
+      "method": "get",
+      "url": "https://rest.uniprot.org/uniprotkb/stream",
+      "status": 400,
+      "error": null,
+      "bytes": 71,
+      "t": 1795018921.69
+    },
+    {
+      "method": "get",
+      "url": "https://rest.uniprot.org/uniprotkb/stream",
+      "status": 400,
+      "error": null,
+      "bytes": 71,
+      "t": 1795018923.0
+    },
+    {
+      "method": "get",
+      "url": "https://rest.uniprot.org/uniprotkb/stream",
+      "status": 400,
+      "error": null,
+      "bytes": 71,
+      "t": 1795018923.69
+    },
+    {
+      "method": "get",
+      "url": "https://rest.uniprot.org/uniprotkb/stream",
+      "status": 400,
+      "error": null,
+      "bytes": 71,
+      "t": 1795018924.61
+    },
+    {
+      "method": "get",
+      "url": "https://rest.uniprot.org/uniprotkb/stream",
+      "status": 400,
+      "error": null,
+      "bytes": 71,
+      "t": 1795018925.74
+    },
+    {
+      "method": "get",
+      "url": "https://rest.uniprot.org/uniprotkb/stream",
+      "status": 400,
+      "error": null,
+      "bytes": 71,
+      "t": 1795018926.57
+    },
+    {
+      "method": "get",
+      "url": "https://rest.uniprot.org/uniprotkb/stream",
+      "status": 400,
+      "error": null,
+      "bytes": 71,
+      "t": 1795018927.59
+    },
+    {
+      "method": "get",
+      "url": "https://rest.uniprot.org/uniprotkb/stream",
+      "status": 400,
+      "error": null,
+      "bytes": 71,
+      "t": 1795018928.72
+    },
+    {
+      "method": "get",
+      "url": "https://rest.uniprot.org/uniprotkb/stream",
+      "status": 400,
+      "error": null,
+      "bytes": 71,
+      "t": 1795018929.56
+    }
+  ],
+  "http_requests": [
+    {
+      "method": "get",
+      "url": "https://omnipathdb.org/enzsub?genesymbols=yes&organisms=9606&types=phosphorylation&fields=sources,references&format=tsv",
+      "status": 200,
+      "error": null,
+      "bytes": 4789335,
+      "t": 1795018901.4
+    },
+    {
+      "method": "get",
+      "url": "https://rest.uniprot.org/uniprotkb/stream",
+      "status": 400,
+      "error": null,
+      "bytes": 71,
+      "t": 1795018916.62
+    },
+    {
+      "method": "get",
+      "url": "https://rest.uniprot.org/uniprotkb/stream",
+      "status": 400,
+      "error": null,
+      "bytes": 71,
+      "t": 1795018919.0
+    },
+    {
+      "method": "get",
+      "url": "https://rest.uniprot.org/uniprotkb/stream",
+      "status": 400,
+      "error": null,
+      "bytes": 71,
+      "t": 1795018919.72
+    },
+    {
+      "method": "get",
+      "url": "https://rest.uniprot.org/uniprotkb/stream",
+      "status": 400,
+      "error": null,
+      "bytes": 71,
+      "t": 1795018920.68
+    },
+    {
+      "method": "get",
+      "url": "https://rest.uniprot.org/uniprotkb/stream",
+      "status": 400,
+      "error": null,
+      "bytes": 71,
+      "t": 1795018921.69
+    },
+    {
+      "method": "get",
+      "url": "https://rest.uniprot.org/uniprotkb/stream",
+      "status": 400,
+      "error": null,
+      "bytes": 71,
+      "t": 1795018923.0
+    },
+    {
+      "method": "get",
+      "url": "https://rest.uniprot.org/uniprotkb/stream",
+      "status": 400,
+      "error": null,
+      "bytes": 71,
+      "t": 1795018923.69
+    },
+    {
+      "method": "get",
+      "url": "https://rest.uniprot.org/uniprotkb/stream",
+      "status": 400,
+      "error": null,
+      "bytes": 71,
+      "t": 1795018924.61
+    },
+    {
+      "method": "get",
+      "url": "https://rest.uniprot.org/uniprotkb/stream",
+      "status": 400,
+      "error": null,
+      "bytes": 71,
+      "t": 1795018925.74
+    },
+    {
+      "method": "get",
+      "url": "https://rest.uniprot.org/uniprotkb/stream",
+      "status": 400,
+      "error": null,
+      "bytes": 71,
+      "t": 1795018926.57
+    },
+    {
+      "method": "get",
+      "url": "https://rest.uniprot.org/uniprotkb/stream",
+      "status": 400,
+      "error": null,
+      "bytes": 71,
+      "t": 1795018927.59
+    },
+    {
+      "method": "get",
+      "url": "https://rest.uniprot.org/uniprotkb/stream",
+      "status": 400,
+      "error": null,
+      "bytes": 71,
+      "t": 1795018928.72
+    },
+    {
+      "method": "get",
+      "url": "https://rest.uniprot.org/uniprotkb/stream",
+      "status": 400,
+      "error": null,
+      "bytes": 71,
+      "t": 1795018929.56
+    },
+    {
+      "method": "get",
+      "url": "https://rest.uniprot.org/uniprotkb/accessions",
+      "status": 200,
+      "error": null,
+      "bytes": 83726,
+      "t": 1795018935.11
+    },
+    {
+      "method": "get",
+      "url": "https://rest.uniprot.org/uniprotkb/accessions",
+      "status": 200,
+      "error": null,
+      "bytes": 81594,
+      "t": 1795018936.19
+    },
+    {
+      "method": "get",
+      "url": "https://rest.uniprot.org/uniprotkb/accessions",
+      "status": 200,
+      "error": null,
+      "bytes": 86467,
+      "t": 1795018937.34
+    },
+    {
+      "method": "get",
+      "url": "https://rest.uniprot.org/uniprotkb/accessions",
+      "status": 200,
+      "error": null,
+      "bytes": 92874,
+      "t": 1795018938.57
+    },
+    {
+      "method": "get",
+      "url": "https://rest.uniprot.org/uniprotkb/accessions",
+      "status": 200,
+      "error": null,
+      "bytes": 93239,
+      "t": 1795018939.77
+    },
+    {
+      "method": "get",
+      "url": "https://rest.uniprot.org/uniprotkb/accessions",
+      "status": 200,
+      "error": null,
+      "bytes": 63527,
+      "t": 1795018940.78
+    },
+    {
+      "method": "get",
+      "url": "https://rest.uniprot.org/uniprotkb/accessions",
+      "status": 200,
+      "error": null,
+      "bytes": 66425,
+      "t": 1795018941.92
+    },
+    {
+      "method": "get",
+      "url": "https://rest.uniprot.org/uniprotkb/accessions",
+      "status": 200,
+      "error": null,
+      "bytes": 77215,
+      "t": 1795018943.89
+    },
+    {
+      "method": "get",
+      "url": "https://rest.uniprot.org/uniprotkb/accessions",
+      "status": 200,
+      "error": null,
+      "bytes": 68829,
+      "t": 1795018945.53
+    },
+    {
+      "method": "get",
+      "url": "https://rest.uniprot.org/uniprotkb/accessions",
+      "status": 200,
+      "error": null,
+      "bytes": 78601,
+      "t": 1795018946.53
+    },
+    {
+      "method": "get",
+      "url": "https://rest.uniprot.org/uniprotkb/accessions",
+      "status": 200,
+      "error": null,
+      "bytes": 74333,
+      "t": 1795018949.4
+    },
+    {
+      "method": "get",
+      "url": "https://rest.uniprot.org/uniprotkb/accessions",
+      "status": 200,
+      "error": null,
+      "bytes": 64615,
+      "t": 1795018950.54
+    },
+    {
+      "method": "get",
+      "url": "https://rest.uniprot.org/uniprotkb/accessions",
+      "status": 200,
+      "error": null,
+      "bytes": 77742,
+      "t": 1795018951.93
+    },
+    {
+      "method": "get",
+      "url": "https://rest.uniprot.org/uniprotkb/accessions",
+      "status": 200,
+      "error": null,
+      "bytes": 89285,
+      "t": 1795018953.7
+    },
+    {
+      "method": "get",
+      "url": "https://rest.uniprot.org/uniprotkb/accessions",
+      "status": 200,
+      "error": null,
+      "bytes": 77008,
+      "t": 1795018954.88
+    },
+    {
+      "method": "get",
+      "url": "https://rest.uniprot.org/uniprotkb/accessions",
+      "status": 200,
+      "error": null,
+      "bytes": 69252,
+      "t": 1795018956.73
+    },
+    {
+      "method": "get",
+      "url": "https://rest.uniprot.org/uniprotkb/accessions",
+      "status": 200,
+      "error": null,
+      "bytes": 49697,
+      "t": 1795018958.46
+    },
+    {
+      "method": "get",
+      "url": "https://rest.uniprot.org/uniprotkb/accessions",
+      "status": 200,
+      "error": null,
+      "bytes": 92506,
+      "t": 1795018969.18
+    },
+    {
+      "method": "get",
+      "url": "https://rest.uniprot.org/uniprotkb/accessions",
+      "status": 200,
+      "error": null,
+      "bytes": 99835,
+      "t": 1795018970.6
+    },
+    {
+      "method": "get",
+      "url": "https://rest.uniprot.org/uniprotkb/accessions",
+      "status": 200,
+      "error": null,
+      "bytes": 84076,
+      "t": 1795018971.71
+    },
+    {
+      "method": "get",
+      "url": "https://rest.uniprot.org/uniprotkb/accessions",
+      "status": 200,
+      "error": null,
+      "bytes": 99979,
+      "t": 1795018973.7
+    },
+    {
+      "method": "get",
+      "url": "https://rest.uniprot.org/uniprotkb/accessions",
+      "status": 200,
+      "error": null,
+      "bytes": 89362,
+      "t": 1795018975.39
+    },
+    {
+      "method": "get",
+      "url": "https://rest.uniprot.org/uniprotkb/accessions",
+      "status": 200,
+      "error": null,
+      "bytes": 79353,
+      "t": 1795018976.51
+    },
+    {
+      "method": "get",
+      "url": "https://rest.uniprot.org/uniprotkb/accessions",
+      "status": 200,
+      "error": null,
+      "bytes": 100299,
+      "t": 1795018977.62
+    },
+    {
+      "method": "get",
+      "url": "https://rest.uniprot.org/uniprotkb/accessions",
+      "status": 200,
+      "error": null,
+      "bytes": 97774,
+      "t": 1795018980.88
+    },
+    {
+      "method": "get",
+      "url": "https://rest.uniprot.org/uniprotkb/accessions",
+      "status": 200,
+      "error": null,
+      "bytes": 99165,
+      "t": 1795018981.95
+    },
+    {
+      "method": "get",
+      "url": "https://rest.uniprot.org/uniprotkb/accessions",
+      "status": 200,
+      "error": null,
+      "bytes": 78451,
+      "t": 1795018983.77
+    },
+    {
+      "method": "get",
+      "url": "https://rest.uniprot.org/uniprotkb/accessions",
+      "status": 200,
+      "error": null,
+      "bytes": 131931,
+      "t": 1795018985.06
+    },
+    {
+      "method": "get",
+      "url": "https://rest.uniprot.org/uniprotkb/accessions",
+      "status": 200,
+      "error": null,
+      "bytes": 70300,
+      "t": 1795018986.19
+    },
+    {
+      "method": "get",
+      "url": "https://rest.uniprot.org/uniprotkb/accessions",
+      "status": 200,
+      "error": null,
+      "bytes": 99536,
+      "t": 1795018987.27
+    },
+    {
+      "method": "get",
+      "url": "https://rest.uniprot.org/uniprotkb/accessions",
+      "status": 200,
+      "error": null,
+      "bytes": 80789,
+      "t": 1795018988.51
+    },
+    {
+      "method": "get",
+      "url": "https://rest.uniprot.org/uniprotkb/accessions",
+      "status": 200,
+      "error": null,
+      "bytes": 73965,
+      "t": 1795018989.49
+    },
+    {
+      "method": "get",
+      "url": "https://rest.uniprot.org/uniprotkb/accessions",
+      "status": 200,
+      "error": null,
+      "bytes": 74403,
+      "t": 1795018990.46
+    },
+    {
+      "method": "get",
+      "url": "https://rest.uniprot.org/uniprotkb/accessions",
+      "status": 200,
+      "error": null,
+      "bytes": 82274,
+      "t": 1795018992.58
+    },
+    {
+      "method": "get",
+      "url": "https://rest.uniprot.org/uniprotkb/accessions",
+      "status": 200,
+      "error": null,
+      "bytes": 87520,
+      "t": 1795018993.6
+    },
+    {
+      "method": "get",
+      "url": "https://rest.uniprot.org/uniprotkb/accessions",
+      "status": 200,
+      "error": null,
+      "bytes": 77629,
+      "t": 1795018994.72
+    },
+    {
+      "method": "get",
+      "url": "https://rest.uniprot.org/uniprotkb/accessions",
+      "status": 200,
+      "error": null,
+      "bytes": 107013,
+      "t": 1795018995.95
+    },
+    {
+      "method": "get",
+      "url": "https://rest.uniprot.org/uniprotkb/accessions",
+      "status": 200,
+      "error": null,
+      "bytes": 93161,
+      "t": 1795018997.98
+    },
+    {
+      "method": "get",
+      "url": "https://rest.uniprot.org/uniprotkb/accessions",
+      "status": 200,
+      "error": null,
+      "bytes": 22063,
+      "t": 1795018998.7
+    },
+    {
+      "method": "get",
+      "url": "https://signor.uniroma2.it/getData.php?organism=9606",
+      "status": 200,
+      "error": null,
+      "bytes": 21554952,
+      "t": 1795019018.12
+    }
+  ],
+  "elapsed_seconds": 158.6,
+  "token_usage": {
+    "total_input_tokens": 110898,
+    "total_output_tokens": 6402,
+    "total_tokens": 117300,
+    "cache_read_input_tokens": 0,
+    "cache_creation_input_tokens": 0,
+    "api_calls": 12,
+    "estimated_cost_usd": 2.1436,
+    "pricing": {
+      "key": "opus",
+      "input_per_M": 15.0,
+      "output_per_M": 75.0
+    },
+    "by_caller": {
+      "agent": {
+        "calls": 12,
+        "input_tokens": 110898,
+        "output_tokens": 6402
+      }
+    },
+    "per_call": [
+      {
+        "call": 1,
+        "caller": "agent",
+        "model": "claude-opus-5-5",
+        "input_tokens": 19054,
+        "output_tokens": 141,
+        "cache_read_tokens": 0,
+        "cache_creation_tokens": 0,
+        "t": 1795018888.88
+      },
+      {
+        "call": 2,
+        "caller": "agent",
+        "model": "claude-opus-5-5",
+        "input_tokens": 6161,
+        "output_tokens": 708,
+        "cache_read_tokens": 0,
+        "cache_creation_tokens": 0,
+        "t": 1795018896.69
+      },
+      {
+        "call": 3,
+        "caller": "agent",
+        "model": "claude-opus-5-5",
+        "input_tokens": 6476,
+        "output_tokens": 246,
+        "cache_read_tokens": 0,
+        "cache_creation_tokens": 0,
+        "t": 1795018900.07
+      },
+      {
+        "call": 4,
+        "caller": "agent",
+        "model": "claude-opus-5-5",
+        "input_tokens": 6960,
+        "output_tokens": 242,
+        "cache_read_tokens": 0,
+        "cache_creation_tokens": 0,
+        "t": 1795018905.06
+      },
+      {
+        "call": 5,
+        "caller": "agent",
+        "model": "claude-opus-5-5",
+        "input_tokens": 7436,
+        "output_tokens": 388,
+        "cache_read_tokens": 0,
+        "cache_creation_tokens": 0,
+        "t": 1795018910.28
+      },
+      {
+        "call": 6,
+        "caller": "agent",
+        "model": "claude-opus-5-5",
+        "input_tokens": 7739,
+        "output_tokens": 506,
+        "cache_read_tokens": 0,
+        "cache_creation_tokens": 0,
+        "t": 1795018915.26
+      },
+      {
+        "call": 7,
+        "caller": "agent",
+        "model": "claude-opus-5-5",
+        "input_tokens": 8210,
+        "output_tokens": 351,
+        "cache_read_tokens": 0,
+        "cache_creation_tokens": 0,
+        "t": 1795018933.53
+      },
+      {
+        "call": 8,
+        "caller": "agent",
+        "model": "claude-opus-5-5",
+        "input_tokens": 8496,
+        "output_tokens": 1076,
+        "cache_read_tokens": 0,
+        "cache_creation_tokens": 0,
+        "t": 1795019009.41
+      },
+      {
+        "call": 9,
+        "caller": "agent",
+        "model": "claude-opus-5-5",
+        "input_tokens": 9279,
+        "output_tokens": 331,
+        "cache_read_tokens": 0,
+        "cache_creation_tokens": 0,
+        "t": 1795019013.82
+      },
+      {
+        "call": 10,
+        "caller": "agent",
+        "model": "claude-opus-5-5",
+        "input_tokens": 9646,
+        "output_tokens": 798,
+        "cache_read_tokens": 0,
+        "cache_creation_tokens": 0,
+        "t": 1795019025.81
+      },
+      {
+        "call": 11,
+        "caller": "agent",
+        "model": "claude-opus-5-5",
+        "input_tokens": 10328,
+        "output_tokens": 924,
+        "cache_read_tokens": 0,
+        "cache_creation_tokens": 0,
+        "t": 1795019035.39
+      },
+      {
+        "call": 12,
+        "caller": "agent",
+        "model": "claude-opus-5-5",
+        "input_tokens": 11113,
+        "output_tokens": 691,
+        "cache_read_tokens": 0,
+        "cache_creation_tokens": 0,
+        "t": 1795019042.47
+      }
+    ],
+    "note": "Exact counts from LangChain usage_metadata on every LLM call (agent + Biomni-internal)."
+  },
+  "leakage_audit": {
+    "patterns_checked": [
+      "phosphoatlas_gold",
+      "gold_standard",
+      "contributions/",
+      "agent-pa-benchmark",
+      "/Users/swechchhaparajuli/MSDSAI/Practicum/Exploration/agent-pa-benchmark"
+    ],
+    "hits": [],
+    "local_db_access_in_live_mode": false,
+    "clean": true
+  }
+}
